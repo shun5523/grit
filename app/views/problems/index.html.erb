@@ -1,1 +1,14 @@
 <h2>悩み相談一覧</h2>
+
+
+<ul>
+
+<% @problems.each do |problem| %>
+<h3>タイトル</h3><br>
+<%= link_to problem.title, problem_path(problem.id) %><br>
+<h3>ジャンル</h3><br>
+<%= problem.genre %><br>
+<h3>本文</h3>
+<%= problem.body %>
+<% end %>
+</ul>

@@ -1,5 +1,5 @@
 <h2>ユーザー編集ページ</h2>
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, url:user_user_path, method: :patch) do |f| %>
 	  <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
@@ -14,4 +14,8 @@
     <%= f.label :introduction %><br />
     <%= f.text_field :introduction, autofocus: true, autocomplete: "introduction" %>
   </div>
+<%= f.select :country, ['アメリカ', 'イギリス', 'イタリア'], {include_blank: '選択'}, autofocus: true, autocomplete: "country" %>
+
+<%= f.submit %>
+
 <% end %>

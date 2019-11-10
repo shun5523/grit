@@ -1,1 +1,9 @@
 <H2>悩み相談詳細</H2>
+
+<ul>
+	<li><%= @problem.title %></li>
+	<li><%= @problem.genre %></li>
+	<li><%= @problem.body %></li>
+<%= link_to '一覧', problems_path %>
+<%= link_to '編集', edit_problem_path(@problem) %>
+</ul>

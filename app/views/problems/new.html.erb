@@ -5,6 +5,10 @@
 	<%= f.label :タイトル %><br>
 	<%= f.text_field :title %><br>
 
+	<%= f.label :ジャンル %><br>
+	<%= f.select :genre, ['英語', 'ホームステイ', '食事', '交友関係', '生活', 'その他'], {include_blank: '選択'}, autofocus: true, autocomplete: "genre" %>
+<br>
+
 
 	<%= f.label :本文 %><br>
 	<%= f.text_field :body %><br>
