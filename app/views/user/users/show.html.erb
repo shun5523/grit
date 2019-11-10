@@ -1,0 +1,12 @@
+<h2>マイページ</h2>
+
+
+<% @user.each do |user| %>
+
+	<%= user.name %><br>
+	<%= user.age %><br>
+	<%= user.sex %><br>
+
+<%= link_to '編集ページ', edit_user_user_path(@user) %><br>
+
+<% end %>

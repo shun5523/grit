@@ -1,0 +1,15 @@
+<h2>n悩み新規投稿</h2>
+
+<%= form_for(@problem, url:problems_path, method: :post) do |f| %>
+
+	<%= f.label :タイトル %><br>
+	<%= f.text_field :title %><br>
+
+
+	<%= f.label :本文 %><br>
+	<%= f.text_field :body %><br>
+<!-- 
+	<%= f.hidden_field :user_id %><br> -->
+
+	<%= f.submit '投稿' %>
+	<% end %>

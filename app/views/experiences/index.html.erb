@@ -1,0 +1,8 @@
+<h2>経験談一覧</h2>
+<ul>
+
+<% @experiences.each do |experience| %>
+<li><%= link_to experience.title, experience_path(experience.id) %></li>
+	<li><%= experience.body %></li>
+	<% end %>
+</ul>

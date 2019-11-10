@@ -8,9 +8,9 @@ Rails.application.routes.draw do
 	end
 
   namespace :user do
-    resources :users, only: [:show, :edit, :update, :destroy]
     resources :experiences, only: [:index, :show, :edit, :update, :destroy]
     resources :problems, only: [:index, :show, :edit, :update, :destroy]
+    resources :users, only: [:show, :edit, :update, :destroy]
   end
 
   resources :experiences  do
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
 
   get 'top', to: 'top#top'
+
 
 
 
