@@ -9,9 +9,9 @@ class User < ApplicationRecord
   has_many :visits
   has_many :countries, through: :visits
   has_many :comments
-  has_many :problems
+  has_many :problems, dependent: :destroy
   has_many :experiences
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
 
 
 

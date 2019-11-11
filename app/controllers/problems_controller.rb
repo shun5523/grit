@@ -21,16 +21,15 @@ class ProblemsController < ApplicationController
 
 	def show
 		@problem = Problem.find(params[:id])
+		@comment = Comment.new
 	end
 
 	def edit
 		@problem = Problem.find(params[:id])
-
 	end
 
 	def update
 		 @problem = Problem.find(params[:id])
-         @problem.user_id = current_user.id
       if @problem.update(problem_params)
          # flash[:notice] = "the Book was successfully edited"
          redirect_to problem_path(@problem)

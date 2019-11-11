@@ -29,7 +29,6 @@ class ExperiencesController < ApplicationController
 
 	def update
 		 @experience = Experience.find(params[:id])
-         @experience.user_id = current_user.id
       if @experience.update(experience_params)
          # flash[:notice] = "the Book was successfully edited"
          redirect_to experience_path(@experience)

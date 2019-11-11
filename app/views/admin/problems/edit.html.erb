@@ -1,0 +1,20 @@
+<h2>悩み編集ページ(アドミン)</h2>
+<%= form_for(@problem) do |f| %>
+
+	<%= f.label :タイトル %><br>
+	<%= f.text_field :title %><br>
+
+	<%= f.label :ジャンル %><br>
+	<%= f.select :genre, ['英語', 'ホームステイ', '食事', '交友関係', '生活', 'その他'], {include_blank: '選択'}, autofocus: true, autocomplete: "genre" %>
+<br>
+
+
+	<%= f.label :本文 %><br>
+	<%= f.text_field :body %><br>
+
+	<%= f.submit '更新' %>
+
+	<%= link_to '一覧', problems_path %>
+	<%= link_to "詳細ページ", problem_path(@problem) %>
+
+<% end %>

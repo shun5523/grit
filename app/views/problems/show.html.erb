@@ -1,4 +1,4 @@
-<H2>悩み相談詳細</H2>
+<h2>悩み相談詳細</h2>
 
 <ul>
 	<li><%= @problem.title %></li>
@@ -7,3 +7,9 @@
 <%= link_to '一覧', problems_path %>
 <%= link_to '編集', edit_problem_path(@problem) %>
 </ul>
+
+<br>
+<%= @problem.comments.count %>
+<h3><%= @problem.comments.count %>件のコメント</h3>
+
+<ol></ol>
