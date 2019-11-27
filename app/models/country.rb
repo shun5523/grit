@@ -1,4 +1,4 @@
 class Country < ApplicationRecord
-	has_many :visits
+	has_many :visits,dependent: :destroy
 	has_many :users, through: :visits
 end

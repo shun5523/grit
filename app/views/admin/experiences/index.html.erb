@@ -1,7 +1,51 @@
-<h2>経験談一覧(アドミン)</h2>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-3">
 
-<% @experiences.each do |experience| %>
-<li><%= link_to experience.title, experience_path(experience.id) %></li>
-	<li><%= experience.body %></li>
-	<% end %>
-</ul>
+					<div class="search">
+					  <h3>タイトル検索</h3>
+						<%= form_tag(experiences_path,:method => 'get') do %>
+								<p><%= text_field_tag :search %>
+								<button type="submit" class="btn btn-success" >Search</button></p>
+						<% end %>
+					</div>
+				</div>
+
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-12">
+						  <h2>経験談一覧(管理画面)</h2>
+							<div class="border">
+								<table class="table table-borderless">
+									<thead>
+											<tr>
+											  <th></th>
+											  <th>ユーザーネーム</th>
+											  <th>タイトル</th>
+											</tr>
+									</thead>
+
+									<tbody>
+										  <% @experiences.each do |experience| %>
+											<tr>
+											  <td>
+										        <%= attachment_image_tag experience.user, :user_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no.image.jpeg", size:"60x60" %></td>
+											  <td>
+								  				<%= link_to experience.user.name, admin_user_path(experience.user.id) %>
+											  </td>
+											  <td>
+								  				<%= link_to experience.title, admin_experience_path(experience.id) %>
+											  </td>
+											</tr>
+										  <% end %>
+										<%= paginate @experiences, class: "paginate" %>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+		</div>
+

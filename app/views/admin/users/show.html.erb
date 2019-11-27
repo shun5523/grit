@@ -1,0 +1,65 @@
+	 <h2>マイページ</h2>
+<div class="container-fluid">
+	<div class="row">
+
+        <div class="col-md-5">
+          	<div class="row">
+				<div class="col-md-12" style="text-align: center; ">
+			 		  <%= attachment_image_tag @user, :user_image, :fill, 200, 200, class: "img-circle profile-thumb", fallback: "no.image.jpeg", size:"300x300" %>
+					  <h3>自己紹介</h3>
+		 				<div class="box2">
+				  			<%= @user.introduction %>
+		 				</div>
+			 	</div>
+			</div>
+        </div>
+
+	    <div class="col-md-7" style="text-align: center;">
+	      	<div class="row">
+			 	<div class="col-md-12">
+			 		<h3>名前</h3>
+					<p class="my_font"><%= @user.name %></p>
+			 	</div>
+			</div>
+
+			<div class="row">
+			 	<div class="col-md-12">
+			 		<h3>年齢</h3>
+					 <p class="my_font"><%= @user.age %></p>
+			 	</div>
+			</div>
+
+			<div class="row">
+			 	<div class="col-md-12">
+			 		<h3>性別</h3>
+					<p class="my_font"><%= @user.sex %></p>
+			 	</div>
+			</div>
+
+			<div class="row">
+			 	<div class="col-md-12">
+					<h3>滞在国</h3>
+					  	<% @user.visits.each do |visit| %>
+							<p class="my_font"><%= visit.country.country_name %></p>
+					  	<% end %>
+				</div>
+			</div>
+
+	    </div>
+
+		<div class="row">
+		  <div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="box1">
+					<% if current_user.id == @user.id %>
+			  			<%= link_to '編集ページ', edit_admin_user_path(@user) %><br>
+					<% end %>
+				</div>
+			</div>
+		  <div class="col-md-3"></div>
+		</div>
+	</div>
+</div>
+
+
+

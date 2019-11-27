@@ -1,6 +1,9 @@
 class ProblemsController < ApplicationController
+		before_action :authenticate_user!,  only: [:show, :edit, :update, :destroy, :new, :create]
+
 	def index
-		@problems = Problem.all
+		@problems = Problem.page(params[:page]).reverse_order
+	    @problems = Problem.title_search(params[:search]).page(params[:page]).reverse_order
 	end
 
 	def new
@@ -21,6 +24,7 @@ class ProblemsController < ApplicationController
 
 	def show
 		@problem = Problem.find(params[:id])
+		@user = @problem.user
 		@comment = Comment.new
 	end
 
@@ -40,6 +44,9 @@ class ProblemsController < ApplicationController
 	end
 
 	def destroy
+		@problem = Problem.find(params[:id])
+		@problem.destroy
+		redirect_to problems_path
 	end
 
   private

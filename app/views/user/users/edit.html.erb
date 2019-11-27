@@ -1,21 +1,61 @@
 <h2>ユーザー編集ページ</h2>
-<%= form_for(@user, url:user_user_path, method: :patch) do |f| %>
-	  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :age %><br />
-    <%= f.number_field :age,min:1,max:100,sttep:10, autofocus: true, autocomplete: "age" %>
-  </div>
+<div class="container-fluid">
+  <%= form_for(@user, url:user_user_path, method: :patch) do |f| %>
+    <div class="row">
 
-  <div class="field">
-    <%= f.label :introduction %><br />
-    <%= f.text_field :introduction, autofocus: true, autocomplete: "introduction" %>
-  </div>
-<%= f.select :country, ['アメリカ', 'イギリス', 'イタリア'], {include_blank: '選択'}, autofocus: true, autocomplete: "country" %>
+            <div class="col-md-5">
+              <div class="row">
+              　<div class="col-md-12" style="text-align: center; ">
+                  <label>ProfileImage</label>
+                    <%= attachment_image_tag @user, :user_image, :fill, 200, 200, class: "img-circle profile-thumb", fallback: ""%>
+                    <%= f.attachment_field :user_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+                  <h3>自己紹介</h3>
+                    <div class="box2">
+                      <%= f.text_area :introduction, rows:'5', size:"50x5",autofocus: true, autocomplete: "introduction" %>
+                    </div>
+                </div>
+              </div>
+            </div>
 
-<%= f.submit %>
+            <div class="col-md-6" style="text-align: center;">
+              <div class="row">
+                <div class="col-md-12">
+                  <h3><%= f.label :name %></h3>
+                  <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+                </div>
+              </div>
 
-<% end %>
+            <div class="row">
+              <div class="col-md-12">
+                <h3><%= f.label :age %></h3>
+                <%= f.number_field :age,min:1,max:100,sttep:10, autofocus: true, autocomplete: "age" %>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                  <h3><%= f.label "国名" %></h3>
+                    <%= collection_check_boxes(:user, :country_ids, Country.all, :id, :country_name) do |b| %>
+                      <%= b.label { b.check_box + b.text } %>
+                    <% end %>
+                </div>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+          <div class="col-md-8" style="text-align: center;">
+            <%= f.submit %>
+          </div>
+        <div class="col-md-2"></div>
+    </div>
+  <% end %>
+</div>
+    <button type="submit" class="btn btn-success" >
+      <%= link_to "戻る", user_user_path(@user.id)  %>
+    </button>
+
+
+
+
+

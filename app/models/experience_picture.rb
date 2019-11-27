@@ -1,0 +1,2 @@
+class ExperiencePicture < ApplicationRecord
+end

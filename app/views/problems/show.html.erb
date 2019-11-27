@@ -1,27 +1,81 @@
 <h2>悩み相談詳細</h2>
 
-<ul>
-	<li><%= @problem.title %></li>
-	<li><%= @problem.genre %></li>
-	<li><%= @problem.body %></li>
-<%= link_to '一覧', problems_path %>
-<%= link_to '編集', edit_problem_path(@problem) %>
-</ul>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-1"></div>
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-2" style="padding-left: 30px;">
+							<%= attachment_image_tag @problem.user, :user_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no.image.jpeg", size:"100x100" %>
+							<p style="text-align: center;"><%= link_to @problem.user.name, user_user_path(@problem.user.id) %></p>
+						</div>
+						<div class="col-md-10">
+							<div class="box1">
+								<p style="font-size: 20px;"><%= @problem.title %></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="box2">
+						<%= @problem.body %>
+					</div>
+				</div>
+			<div class="col-md-2"></div>
+		</div>
 
-<br>
-<%= @problem.comments.count %>
-<h3><%= @problem.comments.count %>件のコメント</h3>
+	  <h3><%= @problem.comments.count %>件のコメント</h3>
 
-<ol>
-	<% @problem.comments.each do |comment| %>
-	<%= comment.user.name %><br>
-	<%= comment.created_at.strftime('%Y/%m/%d') %><br>
-	<%= comment.comment %><br>
-	<% end %>
-</ol>
+		<div class="row">
+		  <div class="col-md-2"></div>
+		 	 <div class="col-md-8">
+				<% @problem.comments.each do |comment| %>
+					<div class="box3">
+						<%= comment.user.name %><br>
+						<%= comment.created_at.strftime('%Y/%m/%d') %><br>
+						<%= comment.comment %><br>
+					</div>
+					  <% if current_user.id == comment.user.id %>
+						<%= link_to 'コメント削除', problem_comment_path(comment.problem.id, comment.id), method:  :delete %>
+					  <% end %>
+				<% end %>
+		  	</div>
+		  <div class="col-md-2"></div>
+		</div>
 
+		<div class="row">
+		  <div class="col-md-2"></div>
+		 	<div class="col-md-8">
+				<%= form_for [@problem, @comment] do |f| %>
+					<div class="comment" >
+						<%= f.text_area :comment, rows:'5', size:"100x5", placeholder: "コメント" %>
+					</div>
+						<%= f.submit "投稿する" %>
+				<% end %>
+			</div>
+		  <div class="col-md-2"></div>
+		</div>
 
-<%= form_for [@problem, @comment] do |f| %>
-	<%= f.text_area :comment, rows:'5', placeholder: "コメント" %>
-	<%= f.submit "投稿する" %>
-<% end %>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="button">
+					<button type="submit" class="btn btn-success" >
+						<%= link_to '一覧', problems_path %>
+					</button>
+						<% if current_user.id == @user.id %>
+							<button type="submit" class="btn btn-success" >
+								<%= link_to '編集', edit_problem_path(@problem) %>
+							</button>
+							<button type="submit" class="btn btn-success" >
+								<%= link_to '削除', problem_path(@problem), method:  :delete, data: {confirm: 'are you sure?'} %>
+							</button>
+						<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+

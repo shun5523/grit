@@ -1,16 +1,97 @@
 <h2>経験談新規投稿</h2>
 
+  <div class="container-fluid">
+    <%= form_for(@experience, url:experiences_path, method: :post) do |f| %>
 
-<%= form_for(@experience, url:experiences_path, method: :post) do |f| %>
+      <div class="row">
+          <div class="col-md-2"></div>
+            <div class="col-md-8" style="text-align: center;">
+              <p><%= f.label :タイトル %></p>
+	            <div class=""><%= f.text_field :title %></div>
+            </div>
+          <div class="col-md-2"></div>
+      </div>
 
-	<%= f.label :タイトル %><br>
-	<%= f.text_field :title %><br>
+      <div class="row">
+          <div class="col-md-2"></div>
+            <div class="col-md-8" style="text-align: center;">
+              <p><%= f.label :体験談 %></p>
+              <div class="box4"><%= f.text_area :body, size:"90x10" %></div>
+            </div>
+          <div class="col-md-2"></div>
+      </div>
 
+      <div class="row">
+          <div class="col-md-2"></div>
+            <div class="col-md-8" style="text-align: center;">
+              <div class="field">
+                <div class="">
+                  <p><%= f.label :"あなたがいた国や場所を入力してください。入力後に確認ボタンを押してください。" %></p>
+                    <%= f.text_field :address, id: 'address', :size=>"60x1" %>
+                    <input type="button" class="btn btn-success" value="確認" onclick="codeAddress()">
+                </div>
+                <%= f.hidden_field :latitude, id: 'lat_post' %>
+                <%= f.hidden_field :longitude, id: 'lng_post' %>
+              </div>
+          　</div>
+          <div class="col-md-2"></div>
+      </div>
 
-	<%= f.label :本文 %><br>
-	<%= f.text_field :body %><br>
-<!-- 
-	<%= f.hidden_field :user_id %><br> -->
+      <div id='map'></div>
 
-	<%= f.submit '投稿' %>
-	<% end %>
+      <div class="row">
+        <div class="col-md-2"></div>
+          <div class="col-md-8" style="text-align: center;">
+            <%= f.submit '投稿' %>
+          </div>
+        <div class="col-md-2"></div>
+      </div>
+
+	  <% end %>
+
+      <button type="submit" class="btn btn-success" >
+        <%= link_to '一覧', experiences_path %>
+      </button>
+
+  <script>
+     let map
+     let geocoder
+
+    function initMap(){
+      // geocoderを初期化
+      geocoder = new google.maps.Geocoder()
+
+      map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 35.681236, lng: 139.767125},
+      zoom: 12
+      });
+    }
+
+    function codeAddress(){
+      // 入力を取得
+      let inputAddress = document.getElementById('address').value;
+
+      // geocodingしたあとmapを移動
+      geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+        if (status == 'OK') {
+    　　　　　　　　　　　　// map.setCenterで地図が移動
+          map.setCenter(results[0].geometry.location);
+
+    　　　　　　　　　　　　// google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
+          var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+          });
+                            // GoogleMap上の指定位置の緯度経度を取得しIdに渡す
+          document.getElementById('lat_post').value = results[0].geometry.location.lat();
+          document.getElementById('lng_post').value = results[0].geometry.location.lng();
+
+        } else {
+          alert('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    }
+  </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["Google_MAP_API_KEY"] %>&callback=initMap" async defer></script>
+

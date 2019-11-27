@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_09_101103) do
+ActiveRecord::Schema.define(version: 2019_11_14_102408) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -44,14 +44,22 @@ ActiveRecord::Schema.define(version: 2019_11_09_101103) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "experience_pictures", force: :cascade do |t|
+    t.integer "experience_id"
+    t.text "experience_image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "experiences", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
     t.text "body"
-    t.integer "latitude"
-    t.integer "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -61,10 +69,9 @@ ActiveRecord::Schema.define(version: 2019_11_09_101103) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pictures", force: :cascade do |t|
+  create_table "problem_pictures", force: :cascade do |t|
     t.integer "problem_id"
-    t.integer "experience_id"
-    t.text "post_image_id"
+    t.text "problem_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

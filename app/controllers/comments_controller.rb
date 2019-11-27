@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+		before_action :authenticate_user!
+
 	def create
 		problem = Problem.find(params[:problem_id])
 		@comment = current_user.comments.new(comment_params)
@@ -8,6 +10,9 @@ class CommentsController < ApplicationController
 	end
 
 	def destroy
+		@comment = Comment.find_by(id: params[:id],problem_id: params[:problem_id])
+		@comment.destroy
+		redirect_to problem_path(@comment.problem.id)
 	end
 
 	private

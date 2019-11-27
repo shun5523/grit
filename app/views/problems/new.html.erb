@@ -1,19 +1,43 @@
-<h2>n悩み新規投稿</h2>
+<h2>悩み相談新規投稿</h2>
 
-<%= form_for(@problem, url:problems_path, method: :post) do |f| %>
+	<div class="container-fluid">
+		<%= form_for(@problem, url:problems_path, method: :post) do |f| %>
 
-	<%= f.label :タイトル %><br>
-	<%= f.text_field :title %><br>
+			<div class="row">
+			  	<div class="col-md-2"></div>
+					<div class="col-md-8" style="text-align: center;">
+						<p><%= f.label :タイトル %></p>
+						<div class=""><%= f.text_field :title %></div>
+					</div>
+			  	<div class="col-md-2"></div>
+			</div>
 
-	<%= f.label :ジャンル %><br>
-	<%= f.select :genre, ['英語', 'ホームステイ', '食事', '交友関係', '生活', 'その他'], {include_blank: '選択'}, autofocus: true, autocomplete: "genre" %>
-<br>
+			<div class="row">
+			  	<div class="col-md-2"></div>
+					<div class="col-md-8" style="text-align: center;">
+						<p><%= f.label :ジャンル %></p>
+						<div class=""><%= f.select :genre, ['英語', 'ホームステイ', '食事', '交友関係', '生活', 'その他'], {include_blank: '選択'}, autofocus: true, autocomplete: "genre" %>
+						</div>
+					</div>
+			  	<div class="col-md-2"></div>
+			</div>
 
+			<div class="row">
+			  	<div class="col-md-2"></div>
+					<div class="col-md-8" style="text-align: center;">
+						<p><%= f.label :相談内容 %></p>
+						<div class="box4"><%= f.text_area :body, size:"90x10" %></div>
+					</div>
+			  	<div class="col-md-2"></div>
+			</div>
 
-	<%= f.label :本文 %><br>
-	<%= f.text_field :body %><br>
-<!-- 
-	<%= f.hidden_field :user_id %><br> -->
+			<div class="row">
+			  	<div class="col-md-2"></div>
+					<div class="col-md-8" style="text-align: center;">
+						<br><%= f.submit '相談内容を投稿する' %>
+					</div>
+			  	<div class="col-md-2"></div>
+			</div>
 
-	<%= f.submit '投稿' %>
-	<% end %>
+		<% end %>
+	</div>

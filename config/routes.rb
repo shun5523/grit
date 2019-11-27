@@ -18,11 +18,11 @@ Rails.application.routes.draw do
   end
 
   resources :problems do
-    resource :comments, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy]
   end
 
   get 'top', to: 'top#top'
-
+  root to: 'top#top'
 
 
 
@@ -34,5 +34,15 @@ Rails.application.routes.draw do
     :registrations => 'users/registrations',
     :sessions => 'users/sessions'
   }
+
+   devise_scope :admin do
+    get "admins/sign_in", :to => "admins/sessions#new"
+    get "admins/sign_out", :to => "admins/sessions#destroy"
+  end
+
+  devise_scope :user do
+    get "users/sign_in", :to => "users/sessions#new"
+    get "users/sign_out", :to => "users/sessions#destroy"
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

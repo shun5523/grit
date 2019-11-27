@@ -1,9 +1,93 @@
-<h2>経験談詳細(アドミン)</h2>
-<ul>
+<p id="notice"></p>
+
+      <h2>経験談詳細(管理画面)</h2>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-1"></div>
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-2" style="padding-left: 30px;">
+                    <%= attachment_image_tag @experience.user, :user_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no.image.jpeg", size:"100x100" %>
+                    <p style="text-align: center;"><%= link_to @experience.user.name, admin_user_path(@experience.user.id) %></p>
+                  </div>
+                  <div class="col-md-10">
+                    <div class="box1">
+                      <p style="font-size: 20px;"><%= @experience.title %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="col-md-1"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"></div>
+              <div class="col-md-8">
+                <div class="box2">
+
+                  <%= @experience.body %>
+                </div>
+              </div>
+            <div class="col-md-2"></div>
+          </div>
+
+        <div id=map></div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="button">
+                <button type="submit" class="btn btn-success" >
+                  <%= link_to '一覧', admin_experiences_path %>
+                </button>
+                <button type="submit" class="btn btn-success" >
+                  <%= link_to '編集', edit_admin_experience_path(@experience) %>
+                </button>
+                <button type="submit" class="btn btn-success" >
+                  <%= link_to '削除', admin_experience_path(@experience), method:  :delete, data: {confirm: 'are you sure?'} %>
+                </button>
+        </div>
+      </div>
+    </div>
+
+  <script type="text/javascript">
+    function initMap() {
+
+  // マップのインスタンスの作成, divタグのid=mapに挿入される
+      var latlng = {lat: <%= @experience.latitude %>, lng: <%= @experience.longitude %>};
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: latlng
+      });
 
 
-<li><%= @experience.title %></li>
-	<li><%= @experience.body %></li>
-<%= link_to '一覧', experiences_path %>
-<%= link_to '編集', edit_experience_path(@experience) %>
-</ul>
+      var transitLayer = new google.maps.TransitLayer();
+      transitLayer.setMap(map);
+
+
+  // マーカークリック時のマーカの情報
+
+      var contentString = '住所：<%= @experience.address %>';
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+  // マーカーを表示作る
+
+      var marker = new google.maps.Marker({
+        position:latlng,
+        map: map,
+        title: contentString
+      });
+
+  // マーカーのクリック時のイベント追加
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+    }
+  </script>
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV["Google_MAP_API_KEY"] %>&callback=initMap">
+  </script>
+
+
+

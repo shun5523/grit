@@ -2,10 +2,8 @@
 
 one:
   problem_id: 1
-  experience_id: 1
-  post_image_id: MyText
+  problem_image_id: MyText
 
 two:
   problem_id: 1
-  experience_id: 1
-  post_image_id: MyText
+  problem_image_id: MyText

@@ -1,0 +1,63 @@
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-3">
+
+					<div class="search">
+					  <h3>タイトル検索</h3>
+						<%= form_tag(problems_path,:method => 'get') do %>
+								<p><%= text_field_tag :search %>
+								<button type="submit" class="btn btn-success" >Search</button></p>
+						<% end %>
+					</div>
+
+					<div class="search">
+					  <h3>ジャンル検索</h3>
+						<%= form_tag(problems_path,:method => 'get') do %>
+								<p><%= select_tag :genre, options_for_select([["英語","英語"],["ホームステイ","ホームステイ"],["食事","食事"],["交友関係","交友関係"],["生活","生活"],["その他","その他"]]) %><br>
+								<button type="submit" class="btn btn-success" >Search</button></p>
+						<% end %>
+					</div>
+				</div>
+
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-12">
+						  <h2>ユーザーの悩み相談投稿一覧</h2>
+							<div class="border">
+								<table class="table table-borderless">
+									<thead>
+										<tr>
+											 <th></th>
+											 <th>ユーザーネーム</th>
+											 <th>ジャンル</th>
+											 <th>タイトル</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										  <% @problems.each do |problem| %>
+											<tr>
+											  <td>
+										        <%= attachment_image_tag problem.user, :user_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no.image.jpeg", size:"60x60" %></td>
+											  <td>
+											  	<%= link_to problem.user.name, user_user_path(problem.user.id) %>
+											  </td>
+											  <td>
+												<%= problem.genre %>
+											  </td>
+											  <td>
+												<%= link_to problem.title, problem_path(problem.id) %>
+											  </td>
+											</tr>
+										  <% end %>
+										<%= paginate @problems, class: "paginate" %>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			  <div class="col-md-1"></div>
+			</div>
+		</div>
+

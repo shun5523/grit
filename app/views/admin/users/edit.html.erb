@@ -1,0 +1,65 @@
+<h2>ユーザー編集ページ</h2>
+
+<div class="container-fluid">
+  <%= form_for(@user, url:admin_user_path, method: :patch) do |f| %>
+    <div class="row">
+
+            <div class="col-md-5">
+              <div class="row">
+              　<div class="col-md-12" style="text-align: center; ">
+                  <label>ProfileImage</label>
+                    <%= attachment_image_tag @user, :user_image, :fill, 200, 200, class: "img-circle profile-thumb", fallback: ""%>
+                    <%= f.attachment_field :user_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+                  <h3>自己紹介</h3>
+                    <div class="box2">
+                      <%= @user.introduction %>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6" style="text-align: center;">
+              <div class="row">
+                <div class="col-md-12">
+                  <h3><%= f.label :name %></h3>
+                  <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+                </div>
+              </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.label :age %>
+                <%= f.number_field :age,min:1,max:100,sttep:10, autofocus: true, autocomplete: "age" %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.label :introduction %><br>
+                <%= f.text_field :introduction, autofocus: true, autocomplete: "introduction" %>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                  <%= f.label "国名" %>
+                    <%= collection_check_boxes(:user, :country_ids, Country.all, :id, :country_name) do |b| %>
+                      <%= b.label { b.check_box + b.text } %>
+                    <% end %>
+                </div>
+            </div>
+    </div>
+
+            <div class="row">
+              <div class="col-md-2"></div>
+                <div class="col-md-8" style="text-align: center;">
+                  <%= f.submit %>
+                </div>
+              <div class="col-md-2"></div>
+            </div>
+  <% end %>
+</div>
+
+    <button type="submit" class="btn btn-success" >
+     <%= link_to "戻る", admin_user_path(@user.id)  %>
+   </button>
