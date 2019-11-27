@@ -6,8 +6,7 @@ class Experience < ApplicationRecord
 	validates :body, presence: true
 	validates :body, length: {minimum: 100, maximum: 1000}
 	validates :address, presence: true
-	validates :latitude, presence: true
-	validates :longitude, presence: true
+
 
 	def favorited_by?(user)
 		favorites.where(user_id: user.id).exists?

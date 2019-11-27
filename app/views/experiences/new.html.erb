@@ -1,6 +1,15 @@
 <h2>経験談新規投稿</h2>
 
   <div class="container-fluid">
+    <% if @experience.errors.any? %>
+      <h3><%= @experience.errors.count %>件のエラーが発生しました。</h3>
+          <ul>
+            <% @experience.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+    <% end %>
+
     <%= form_for(@experience, url:experiences_path, method: :post) do |f| %>
 
       <div class="row">
@@ -26,7 +35,7 @@
             <div class="col-md-8" style="text-align: center;">
               <div class="field">
                 <div class="">
-                  <p><%= f.label :"あなたがいた国や場所を入力してください。入力後に確認ボタンを押してください。" %></p>
+                  <p><%= f.label :"Address:あなたがいた国や場所を入力してください。入力後に確認ボタンを押してください。" %></p>
                     <%= f.text_field :address, id: 'address', :size=>"60x1" %>
                     <input type="button" class="btn btn-success" value="確認" onclick="codeAddress()">
                 </div>

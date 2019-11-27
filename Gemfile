@@ -72,5 +72,10 @@ gem 'openssl'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'kaminari','~> 1.1.1'
 gem 'dotenv-rails'
+
+group :production do
+  gem 'mysql2'
+end
+
 # gem 'materialize-sass', '~> 1.0.0'
 # gem 'material_icons'

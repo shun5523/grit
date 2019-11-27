@@ -1,6 +1,15 @@
 <h2>悩み相談新規投稿</h2>
 
 	<div class="container-fluid">
+		<% if @problem.errors.any? %>
+      		<h3><%= @problem.errors.count %>件のエラーが発生しました。</h3>
+         	  <ul>
+           		 <% @problem.errors.full_messages.each do |message| %>
+             		 <li><%= message %></li>
+           		 <% end %>
+         	  </ul>
+   		<% end %>
+
 		<%= form_for(@problem, url:problems_path, method: :post) do |f| %>
 
 			<div class="row">

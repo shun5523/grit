@@ -66,12 +66,9 @@ class ExperiencesController < ApplicationController
 		redirect_to experiences_path
 	end
 
-private
+  private
 	def experience_params
 		params.require(:experience).permit(:user_id, :title, :body, :address, :latitude, :longitude)
 	end
 
-	def experience_picture_params
-		params.require(:experience_picture).permit(:experience_id, :experience_picture)
-	end
 end
