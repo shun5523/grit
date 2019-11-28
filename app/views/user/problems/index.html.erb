@@ -38,7 +38,7 @@
 										  <% @problems.each do |problem| %>
 											<tr>
 											  <td>
-										        <%= attachment_image_tag problem.user, :user_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no.image.jpeg", size:"60x60" %></td>
+										        <%= attachment_image_tag problem.user, :user_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no.image.jpg", size:"60x60" %></td>
 											  <td>
 											  	<%= link_to problem.user.name, user_user_path(problem.user.id) %>
 											  </td>

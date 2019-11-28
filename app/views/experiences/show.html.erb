@@ -7,7 +7,7 @@
               <div class="col-md-8">
                 <div class="row">
                   <div class="col-md-2" style="padding-left: 30px;">
-                    <%= attachment_image_tag @experience.user, :user_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no.image.jpeg", size:"100x100" %>
+                    <%= attachment_image_tag @experience.user, :user_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no.image.jpg", size:"100x100" %>
                     <p style="text-align: center;"><%= link_to @experience.user.name, user_user_path(@experience.user.id) %></p>
                   </div>
                   <div class="col-md-10">

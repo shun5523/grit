@@ -23,7 +23,7 @@
 										  <% @users.each do |user| %>
 											<tr>
 											  <td>
-										        <%= attachment_image_tag user, :user_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no.image.jpeg", size:"60x60" %></td>
+										        <%= attachment_image_tag user, :user_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no.image.jpg", size:"60x60" %></td>
 											  <td>
 												<%= link_to user.name, admin_user_path(user.id) %>
 											  </td>
