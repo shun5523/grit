@@ -2,9 +2,9 @@ class Experience < ApplicationRecord
 	belongs_to :user
 	has_many :favorites, dependent: :destroy
 
-	validates :title, presence: true
+	validates :title, presence: true, length: { maximum: 50 }
 	validates :body, presence: true
-	validates :body, length: {minimum: 100, maximum: 1000}
+	validates :body, length: {minimum: 50, maximum: 1000}
 	validates :address, presence: true
 
 

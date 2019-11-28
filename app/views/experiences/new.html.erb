@@ -16,7 +16,7 @@
           <div class="col-md-2"></div>
             <div class="col-md-8" style="text-align: center;">
               <p><%= f.label :タイトル %></p>
-	            <div class=""><%= f.text_field :title %></div>
+	            <div class=""><%= f.text_field :title, placeholder:"50文字以内でお願いします。" %></div>
             </div>
           <div class="col-md-2"></div>
       </div>
@@ -25,7 +25,7 @@
           <div class="col-md-2"></div>
             <div class="col-md-8" style="text-align: center;">
               <p><%= f.label :体験談 %></p>
-              <div class="box4"><%= f.text_area :body, size:"90x10" %></div>
+              <div class="box4"><%= f.text_area :body, size:"80x10", placeholder:"楽しかったこと、辛かったこと、これをやっとけばよかったなどを50文字以上で書いてください。"%></div>
             </div>
           <div class="col-md-2"></div>
       </div>
