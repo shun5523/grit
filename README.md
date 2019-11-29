@@ -15,7 +15,7 @@ Grit used GoogleMap API.
 
 # Requirement
 
-Ruby 2.5.5
+Ruby 2.5.5 Rails 5.2.3
 
 # Usage
  Please post your problems, anxiety, and experiences related to living abroad. you can get a comment for your problems and a "Like" for your experience from a viewer.
